@@ -1,4 +1,5 @@
 import json
+import os
 
 from more_itertools import chunked
 
@@ -16,10 +17,13 @@ def on_reload():
 
     with open("book_descriptions.json", "r") as file:
         books_json = file.read()
-        book_descriptions = json.loads(books_json)
-        books = list(chunked(book_descriptions, 2))
+    book_descriptions = list(chunked(json.loads(books_json), 2))
+    books_for_pages = list(chunked((book_descriptions), 5))
+    for id, books in enumerate(books_for_pages, start=1):
+
         rendered_page = template.render(book_descriptions=books)
-        with open('index.html', 'w', encoding="utf8") as file:
+        os.makedirs('pages', exist_ok=True)
+        with open(f'pages/index{id}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
 
@@ -28,7 +32,7 @@ def main():
 
     server = Server()
     server.watch('template.html', on_reload)
-    server.serve(root='.', default_filename='index.html')
+    server.serve(root='.', default_filename='pages/index1.html')
 
 
 if __name__ == '__main__':
