@@ -4,13 +4,14 @@ import math
 
 from more_itertools import chunked
 
-from livereload import Server
-
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+from livereload import Server
 
 
 BOOKS_PER_PAGE = 10
 BOOK_COLUMNS = 2
+
 
 def on_reload():
     env = Environment(
@@ -19,7 +20,7 @@ def on_reload():
     )
     template = env.get_template('template.html')
 
-    with open("book_descriptions.json", "r") as file:
+    with open("media/book_descriptions.json", "r") as file:
         books_json = file.read()
     book_descriptions = json.loads(books_json)
     book_descriptions_per_page = list(chunked(book_descriptions, BOOKS_PER_PAGE))
