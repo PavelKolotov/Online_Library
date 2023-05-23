@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import math
@@ -12,13 +13,19 @@ BOOK_COLUMNS = 2
 
 
 def on_reload():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-j', '--json_path', help='Путь к json файлу с результатами',
+                        default='media')
+    args = parser.parse_args()
+    json_path = args.json_path
+
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html'])
     )
     template = env.get_template('template.html')
 
-    with open("media/book_descriptions.json", "r") as file:
+    with open(f'{json_path}/book_descriptions.json', 'r') as file:
         books_json = file.read()
     book_descriptions = json.loads(books_json)
     book_descriptions_per_page = list(chunked(book_descriptions, BOOKS_PER_PAGE))
@@ -31,7 +38,7 @@ def on_reload():
             number_page=id
         )
         os.makedirs('pages', exist_ok=True)
-        with open(f'pages/index{id}.html', 'w', encoding="utf8") as file:
+        with open(f'pages/index{id}.html', 'w', encoding='utf8') as file:
             file.write(rendered_page)
 
 
