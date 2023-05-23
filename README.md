@@ -3,7 +3,7 @@
 
 ## Описание работы скрипта:
 
-Скрипт генерирует страницы сайта он-лайн библиотеки ([Online_Library](https://pavelkolotov.github.io/Online_Library/pages/index1.html)) на основании ресурсов и данных, полученных с сайта 
+Скрипт генерирует страницы сайта онлайн библиотеки ([Online_Library](https://pavelkolotov.github.io/Online_Library/pages/index1.html)) на основании ресурсов и данных, полученных с сайта 
  [tululu.org](https://tululu.org) с помощью [ParseOnlineLibrary](https://github.com/PavelKolotov/ParseOnlineLibrary).
 
 ## Как установить
@@ -29,3 +29,7 @@ pip install -r requirements.txt
 
 В результате выполнения скрипта в каталог `pages` создадутся страницы сайта и запустится локальный сервер.
 Для просмотра сайта перейдите по ссылке [http://127.0.0.1:5500/](http://127.0.0.1:5500/)
+
+## Локальный сайт
+
+Для работы с библиотекой в режиме офлайн, в папке pages запустите файл `index1.html` 
