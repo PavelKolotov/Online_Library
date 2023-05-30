@@ -15,7 +15,7 @@ BOOK_COLUMNS = 2
 def on_reload():
     parser = argparse.ArgumentParser()
     parser.add_argument('-j', '--json_path', help='Путь к json файлу с результатами',
-                        default='media')
+                        default='media/book_descriptions.json')
     args = parser.parse_args()
     json_path = args.json_path
 
@@ -25,7 +25,7 @@ def on_reload():
     )
     template = env.get_template('template.html')
 
-    with open(f'{json_path}/book_descriptions.json', 'r') as file:
+    with open(f'{json_path}', 'r') as file:
         book_descriptions = json.load(file)
     book_descriptions_per_page = list(chunked(book_descriptions, BOOKS_PER_PAGE))
     pages_count = math.ceil(len(book_descriptions)/BOOKS_PER_PAGE)
